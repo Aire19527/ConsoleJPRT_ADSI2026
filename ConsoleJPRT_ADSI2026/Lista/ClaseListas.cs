@@ -11,7 +11,7 @@ namespace ConsoleJPRT_ADSI2026.Lista
     {
         public ClaseListas()
         {
-            ObtenerListaPersonas();
+            LlenarProducto();
         }
 
         private void ObtenerListaPersonas()
@@ -58,7 +58,7 @@ namespace ConsoleJPRT_ADSI2026.Lista
             for (int i = 0; i < 1000; i++)
             {
                 Random rnd = new Random();
-               int valor= rnd.Next(100, 1000);
+                int valor = rnd.Next(100, 1000);
 
                 int precio = valor * i;
 
@@ -80,6 +80,39 @@ namespace ConsoleJPRT_ADSI2026.Lista
         }
 
 
+        private void LlenarProducto()
+        {
+            List<ProductoModel> listaProductos = new List<ProductoModel>();
 
+            Random random = new Random();
+
+            for (int p = 0; p < 100; p++)
+            {
+                int count = random.Next(1000);
+                ProductoModel producto = new ProductoModel()
+                {
+                    Producto = $"Referencia {p}",
+                    Cantidad = count,
+                    //Precio = CalcularPrecio(count, p)
+                    Precio = count * p
+                };
+
+                listaProductos.Add(producto);
+            }
+
+            var listaOrdenada = listaProductos.OrderBy(x => x.Precio).ToList();
+
+            foreach (var item in listaOrdenada)
+            {
+                Console.WriteLine($"Nombre Producto: {item.Producto} - Cantidad: {item.Cantidad} - Precio: {item.Precio}");
+            }
+        }
+
+        private double CalcularPrecio(int cantidad, int indice)
+        {
+            double precio = cantidad * indice;
+
+            return precio;
+        }
     }
 }
