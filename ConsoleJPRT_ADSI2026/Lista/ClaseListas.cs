@@ -11,7 +11,7 @@ namespace ConsoleJPRT_ADSI2026.Lista
     {
         public ClaseListas()
         {
-            LlenarProducto();
+
         }
 
         private void ObtenerListaPersonas()
@@ -79,8 +79,7 @@ namespace ConsoleJPRT_ADSI2026.Lista
             }
         }
 
-
-        private void LlenarProducto()
+        public void LlenarProducto()
         {
             List<ProductoModel> listaProductos = new List<ProductoModel>();
 
@@ -93,18 +92,47 @@ namespace ConsoleJPRT_ADSI2026.Lista
                 {
                     Producto = $"Referencia {p}",
                     Cantidad = count,
-                    //Precio = CalcularPrecio(count, p)
-                    Precio = count * p
+                    Precio = CalcularPrecio(count, p)
+                    //Precio = count * p
                 };
 
                 listaProductos.Add(producto);
             }
 
-            var listaOrdenada = listaProductos.OrderBy(x => x.Precio).ToList();
+            List<ProductoModel> listaOrdenada = listaProductos.OrderByDescending(x => x.Precio).ToList();
 
-            foreach (var item in listaOrdenada)
+            double sumaTotalSimple = listaProductos.Sum(x => x.Precio);
+            double promedioPrecio = listaProductos.Average(x => x.Precio);
+
+            //double sumaTotal = 0;
+            //List<ProductoModel> preciosAltosV2 = new List<ProductoModel>();
+            //foreach (var item in listaOrdenada)
+            //{
+            //    sumaTotal = sumaTotal + item.Precio;
+
+            //    if (item.Precio > 5000)
+            //    {
+            //        preciosAltosV2.Add(item);
+            //    }
+
+            //    Console.WriteLine($"Nombre Producto: {item.Producto} - Cantidad: {item.Cantidad} - Precio: {item.Precio}");
+            //}
+
+            Console.WriteLine("");
+            Console.WriteLine("**********************************************");
+            Console.WriteLine("");
+            //var listaPreciosAltos = listaProductos.Where(x => x.Precio > 5000 && x.Cantidad >= 500).ToList();
+            listaProductos = listaProductos.Where(x => x.Precio > 5000 && x.Cantidad >= 500).ToList();
+
+            foreach (var item in listaProductos)
             {
                 Console.WriteLine($"Nombre Producto: {item.Producto} - Cantidad: {item.Cantidad} - Precio: {item.Precio}");
+            }
+
+            var product = listaProductos.FirstOrDefault(x => x.Precio > 8000);
+            if(product != null)
+            {
+                Console.WriteLine($"Producto: {product.Producto}");
             }
         }
 

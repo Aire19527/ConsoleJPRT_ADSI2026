@@ -12,7 +12,9 @@ namespace ConsoleJPRT_ADSI2026
 
 
             ClaseListas claseListas = new ClaseListas();
-            
+            claseListas.LlenarProducto();
+
+
 
 
         }
