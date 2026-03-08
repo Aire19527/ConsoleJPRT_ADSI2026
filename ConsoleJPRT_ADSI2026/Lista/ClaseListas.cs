@@ -130,7 +130,7 @@ namespace ConsoleJPRT_ADSI2026.Lista
             }
 
             var product = listaProductos.FirstOrDefault(x => x.Precio > 8000);
-            if(product != null)
+            if (product != null)
             {
                 Console.WriteLine($"Producto: {product.Producto}");
             }
@@ -142,5 +142,25 @@ namespace ConsoleJPRT_ADSI2026.Lista
 
             return precio;
         }
+
+
+        public int MayorPromedio(int cantidadIngresada)
+        {
+            List<double> listNumeros = new List<double>();
+            for (int i = 1; i <= cantidadIngresada; i++)
+            {
+                Console.Write($"Dato: {i}: ");
+                double numero = Convert.ToDouble(Console.ReadLine());
+                listNumeros.Add(numero);
+            }
+
+            double promedio = listNumeros.Average();
+
+            return listNumeros.Where(x => x > promedio).Count();
+        }
+
+
+
+       
     }
 }

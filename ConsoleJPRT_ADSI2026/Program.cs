@@ -7,16 +7,8 @@ namespace ConsoleJPRT_ADSI2026
     {
         static void Main(string[] args)
         {
-            //CiclosFor objFor = new CiclosFor();
-            //objFor.PromedioNotas();
-
-
-            ClaseListas claseListas = new ClaseListas();
-            claseListas.LlenarProducto();
-
-
-
-
+            ListaEstudiantes estudiantes = new ListaEstudiantes();
+            estudiantes.Menu();
         }
     }
 }
